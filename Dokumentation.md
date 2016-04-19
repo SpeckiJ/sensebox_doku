@@ -1,9 +1,9 @@
 <img src="https://github.com/sensebox/OER/blob/master/senseBox_edu/images/sensebox_logo_neu.png" width="200"/>
 
-# Wetterstation zur Erfassung verschiedener Klimadaten
+# Wetterstation Specki & Eric
 
 
-## In der Sensebox werden UV-Intensität, Helligkeit, Temperatur, Luftfeuchtigkeit und Windgeschwindigkeit gemessen. Diese werden als Rohdaten an die OpenSenseMap übermittelt, die als Basis für verschiedenste Karten dienen kann.
+## In der Sensebox werden UV-Intensität, Helligkeit, Temperatur, Luftfeuchtigkeit und Windgeschwindigkeit gemessen. Diese Messwerte werden als Rohdaten an die OpenSenseMap übermittelt, die damit als Basis für verschiedenste Karten dienen kann.
 
 ## Materialien
 #### Aus der senseBox:edu
@@ -25,7 +25,7 @@ Auf das Genuino/Uno ist das WIZnet Ethernet Shield gesteckt um Netzwerk und Stro
 Die Stromversorgung der gesamten Box wird über einen Power-over-Ethernet Adapter realisiert.
 Das Anemometer benötigt zusätzlich eine eigene Stromversorgung von 9-25V. Daher wurde das Verbindungskabel zusätzlich mit einem 12V Hohlstecker verlötet der an eine zusätzliche Batterie innerhalb der Box angeschlossen wurde.
 
-<img src="https://github.com/sensebox/OER/blob/master/senseBox_edu/images/sensebox_logo_neu.png" width="200"/>
+<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/20160419123110.png" width="300"/>
 
 #### Softwaresketch
 
@@ -36,11 +36,9 @@ Da das Anemometer die Windgeschwindigkeit über ein analoges Stromsignal wiederg
 Auch bei der UV-Intensität muss eine ähnliche Umrechnung stattfinden um das gewünschte Endergebnis zu erhalten (µW/cm²).
 Die restlichen Sensoren geben direkt nutzbare Werte aus und werden daher direkt hochgeladen.
 
-
-Links zu zusätzlichen Bibliotheken die für einige Sensoren/Shields benötigt werden
+Links zu zusätzlichen Bibliotheken die für einige der Sensoren/Shields benötigt werden
 
 * [HDC1000 Bibliothek](https://github.com/RFgermany/HDC100X_Arduino_Library)
-
 * [Ethernet Bibiliothek](https://github.com/Wiznet/WIZ_Ethernet_Library)
 
 
