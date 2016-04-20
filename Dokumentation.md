@@ -3,17 +3,17 @@
 # Wetterstation Specki & Eric
 
 
-## In der Sensebox werden UV-Intensität, Helligkeit, Temperatur, Luftfeuchtigkeit und Windgeschwindigkeit gemessen. Diese Messwerte werden als Rohdaten an die OpenSenseMap übermittelt, die damit als Basis für verschiedenste Karten dienen kann.
+## In der Sensebox werden verschiedene Daten gemessen. Die Messwerte werden als Rohdaten an die OpenSenseMap übermittelt, die damit als Basis für verschiedenste Karten dienen kann.
 
 ## Materialien
 #### Aus der senseBox:edu
 * Genuino UNO
-* [HDC1000](http://www.watterott.com/de/HDC1008-Breakout) (Temperatur&Luftfeuchtigkeit)
+* [HDC1000](http://www.watterott.com/de/HDC1008-Breakout) (Temperatur&Luftfeuchtigkeitssensor)
 * [VEML6070](http://www.watterott.com/de/VEML6070-Breakout-UV-Lichtsensor) (UV-Lichtsensor)
 * [TSL45315](http://www.watterott.com/en/TSL45315-Breakout) (Lichtsensor)
 
 #### Zusätzliche Hardware
-* [Anemometer](https://www.adafruit.com/products/1733?&main_page=product_info&products_id=1733)
+* [Anemometer](https://www.adafruit.com/products/1733?&main_page=product_info&products_id=1733) (Windsensor)
 * Kupferplatine
 * diverse Kabel
 * Ethernet-Kabel
@@ -345,7 +345,9 @@ Die Station wurde auf der OpenSenseMap unter dem Namen "Wetterstation Specki & E
 Die Box kann direkt unter der Adresse * [Wetterstation Specki & Eric](http://opensensemap.org/#/explore/57062d7345fd40c81974691c) erreicht werden.
 
 ## Stationsaufbau
-Die Station wird am Michaelweg, 48149 Münster in einem Garten aufgestellt. Das Anemometer befindet sich in offener Lage, sodass die Messdaten möglichst wenig verfälscht werden. Auch der Temperatur/Feuchtigkeitssensor befindet sich außerhalb der Box, damit die Daten möglichst wenig verfälscht werden. Licht/UV-Sensor befinden sich innerhalb der Box.
+Die Station wird am Michaelweg, 48149 Münster in einem Garten aufgestellt. Das Anemometer befindet sich in möglichst offener Lage, sodass die Messdaten möglichst wenig verfälscht werden. Auch der Temperatur/Feuchtigkeitssensor befindet sich außerhalb der Box, damit die Daten möglichst wenig verfälscht werden. Licht/UV-Sensor befinden sich innerhalb der Box.
+
+<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/4fce8b81-4eb6-4938-8cd7-8694c4cc79d8.jpg" width="1000"/>
 
 ## Kontakt
 Eric Thieme-Garmann & Jan Speckamp
