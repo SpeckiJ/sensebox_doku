@@ -3,7 +3,7 @@
 # Wetterstation Specki & Eric
 
 
-## In der Sensebox werden verschiedene Daten gemessen. Die Messwerte werden als Rohdaten an die OpenSenseMap übermittelt, die damit als Basis für verschiedenste Karten dienen kann.
+## In der Sensebox werden verschiedenste Daten gemessen, und diese dann an die OpenSenseMap übermittelt, die dadurch als Basis für verschiedene Karten dienen kann.
 
 ## Materialien
 #### Aus der senseBox:edu
