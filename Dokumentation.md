@@ -10,7 +10,7 @@
 * Genuino UNO
 * [HDC1000](http://www.watterott.com/de/HDC1008-Breakout) (Temperatur&Luftfeuchtigkeit)
 * [VEML6070](http://www.watterott.com/de/VEML6070-Breakout-UV-Lichtsensor) (UV-Lichtsensor)
-* [TSL45315](http://www.watterott.com/en/TSL45315-Breakout)(Lichtsensor)
+* [TSL45315](http://www.watterott.com/en/TSL45315-Breakout) (Lichtsensor)
 
 #### Zusätzliche Hardware
 * [Anemometer](https://www.adafruit.com/products/1733?&main_page=product_info&products_id=1733)
@@ -188,9 +188,9 @@ Temperatur/Luftfeuchtigkeitssensor wird gestartet. Falls der Temperatursensor in
     } else {
       Serial.println("Humidity/Temperature Sensor not connected/not working!");
     }
-    ``` 
+``` 
 Analog zu der Fehlererkennung bei dem Temperatursensor, werden auch bei dem Luftfeuchtigkeitssensor Daten die offensichtlich nicht der Realität entsprechen (Luftfeuchtigkeit von weniger als 0,5%) nicht an die OpenSenseMap übertragen.
-    ``` c
+``` c
     // Error value if Sensor is not connected is about 0.4!
     if (hdc_temp_humi.getHumi() > 0.5) {
       postFloatValue(hdc_temp_humi.getHumi(), 1, "XXXXXXXXXXXXXXXXXXXXXXXX");
@@ -200,7 +200,7 @@ Analog zu der Fehlererkennung bei dem Temperatursensor, werden auch bei dem Luft
     // Ende von SENSOR 2
 
 ```
-Das Auslesen des UV-Sensors wurde aus dem Anwendungsbeispiel des Sensors von der offiziellen Herstellerseite übernommen. Weitere Informationen * [hier](https://github.com/watterott/VEML6070-Breakout). Wieder wurde eine einfache Fehlererkennung implementiert (UV-Sensor gibt '3' aus wenn defekt).
+Das Auslesen des UV-Sensors wurde aus dem Anwendungsbeispiel des Sensors von der offiziellen Herstellerseite übernommen. Weitere Informationen [hier](https://github.com/watterott/VEML6070-Breakout). Wieder wurde eine einfache Fehlererkennung implementiert (UV-Sensor gibt '3' aus wenn defekt).
 ``` c
     // SENSOR 4 : UV-Sensor
     // Umrechnung vom Hersteller übernommen
@@ -342,7 +342,7 @@ Die Station wurde auf der OpenSenseMap unter dem Namen "Wetterstation Specki & E
 * Windgeschwindigkeit (m/s)
 * Luftfeuchtigkeit(%)
 
-Die Box kann direkt unter der Adresse * [Wetterstation Specki & Erich](http://opensensemap.org/#/explore/57062d7345fd40c81974691c) erreicht werden.
+Die Box kann direkt unter der Adresse * [Wetterstation Specki & Eric](http://opensensemap.org/#/explore/57062d7345fd40c81974691c) erreicht werden.
 
 ## Stationsaufbau
 Die Station wird am Michaelweg, 48149 Münster in einem Garten aufgestellt. Das Anemometer befindet sich in offener Lage, sodass die Messdaten möglichst wenig verfälscht werden. Auch der Temperatur/Feuchtigkeitssensor befindet sich außerhalb der Box, damit die Daten möglichst wenig verfälscht werden. Licht/UV-Sensor befinden sich innerhalb der Box.
@@ -350,6 +350,6 @@ Die Station wird am Michaelweg, 48149 Münster in einem Garten aufgestellt. Das 
 ## Kontakt
 Eric Thieme-Garmann & Jan Speckamp
 
-[erictg96@googlemail.com](erictg96@googlemail.com) & [speckij@gmail.com](speckij@gmail.com)
+[erictg96@googlemail.com](erictg96@googlemail.com) & [speckij@gmail.com](speckij+sensebox@gmail.com)
 
 13.04.2016
