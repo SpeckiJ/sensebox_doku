@@ -23,9 +23,14 @@
 #### Hardwarekonfiguration
 Auf das Genuino/Uno ist das WIZnet Ethernet Shield gesteckt um Netzwerk und Stromverbindung zu ermöglichen. Zusätzlich haben wir das Board um eine Kupferplatine erweitert um UV und Lichtsensoren horizontal ausgerichtet zu befestigen, damit korrekte Messdaten ermittelt werden können. Während sich die oben genannten Sensoren innerhalb der Wetterfest-Box befinden, sind Temperatursensor und Anemometer außerhalb der Box installiert um die Messdaten nicht zu verfälschen. Über ein Ethernet-Kabel werden die Messdaten in einem vorgegebenen Intervall an die OpenSenseMap übermittelt.
 Die Stromversorgung der gesamten Box wird über einen Power-over-Ethernet Adapter realisiert.
+
+<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/20160419123110.png" width="500"/>
+<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/18d5700e-ed7e-44d7-8bf5-6be4895a9a79.jpg" width="500"/>
+
 Das Anemometer benötigt zusätzlich eine eigene Stromversorgung von 9-25V. Daher wurde das Verbindungskabel zusätzlich mit einem 12V Hohlstecker verlötet der an eine zusätzliche Batterie innerhalb der Box angeschlossen wurde.
 
-<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/20160419123110.png" width="300"/>
+<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/4c9bb9a4-f4c5-492d-b8e4-84626dac6b9a.jpg" width="600"/>
+
 
 #### Softwaresketch
 
