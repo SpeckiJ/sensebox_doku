@@ -63,6 +63,10 @@ Programmcode:
 #define SENSOR2_ID "XXXXXXXXXXXXXXXXXXXXXXXX" // Licht 
 #define SENSOR3_ID "XXXXXXXXXXXXXXXXXXXXXXXX" // Wind (Anemometer)
 
+``` 
+
+Im folgenden werden Variablen für die internen Umrechnungen deklariert
+``` c
 // I2C Variablen Lichtsensor
 #define I2C_ADDR_LUX        (0x29)
 #define REG_CONTROL_LUX     0x00
@@ -85,6 +89,9 @@ HDC100X hdc_temp_humi(0x43);
 // Analogpin Windsensor
 const int analogSensorPin = A3;
 
+``` 
+Netzwerkeinstellungen:
+``` c
 //Ethernet-Parameter
 char server[] = "www.opensensemap.org";
 byte mac[] = { XXXX, XXXX, XXXX, XXXX, XXXX, XXXX };
@@ -99,6 +106,9 @@ long oldTime = 0;
 void setup()
 {
   Serial.begin(9600);
+```
+Netzwerksetup wurde aus der von OpenSenseMap bereitgestellten Schablone übernommen:
+``` c
   Serial.print("Starting network...");
   //Ethernet Verbindung mit DHCP ausführen..
   if (Ethernet.begin(mac) == 0)
@@ -121,18 +131,25 @@ void loop()
   if (millis() - oldTime >= postInterval)
   {
     oldTime = millis();
-
+``` 
+Die Sensoren werden der Reihenfolge nach ausgelesen.
+Lichtsensor wird erst über I2C gestartet und daraufhin die Belichtungszeit festgelegt. Anschließend werden 2 Bytes von dem Lichtsensor angefordert. Diese enthalten 
+``` c
     // SENSOR 1: Lichtsensor
+    // Starten des Lichtsensors
     Wire.begin();
     Wire.beginTransmission(I2C_ADDR_LUX);
     Wire.write(0x80 | REG_CONTROL_LUX);
     Wire.write(0x03); //Power on
     Wire.endTransmission();
-
+    // Festlegen der Belichtungszeit
     Wire.beginTransmission(I2C_ADDR_LUX);
     Wire.write(0x80 | REG_CONFIG_LUX);
-    Wire.write(0x01); //400 ms
+    Wire.write(0x01); //400 ms Belichtungszeit
     Wire.endTransmission();
+```
+Der Sensor liefert zwei Bytes mit einem high/low Wert. Diese werden lokal gespeichert um die einfache Umrechnung zu ermöglichen.
+``` c
     Wire.beginTransmission(I2C_ADDR_LUX);
     Wire.write(0x80 | REG_DATALOW_LUX);
     Wire.endTransmission();
@@ -144,7 +161,9 @@ void loop()
     while (Wire.available()) {
       Wire.read();
     }
-
+``` 
+Umrechnung von high/low Bytes zu Lux wurde aus dem SenseBox-Wiki übernommen.
+``` c
     uint32_t lux; //Umrechnung für Lux vom Sensebox-Wiki
     lux = (high << 8) | (low << 0);
     lux = lux * 2; //Multiplikator für 400ms
@@ -157,7 +176,9 @@ void loop()
     }
     // Ende von SENSOR 1
 
-
+```
+Temperatur/Luftfeuchtigkeitssensor wird gestartet. Falls der Temperatursensor inkorrekt angeschlossen oder defekt ist, liefert er einen inkorrekten Messwert von etwa -40. Da dieser Messwert klar als irregulär erkannt werden kann, da er im Einsatzgebiet dieser SenseBox nicht vorkommt(Mitteleuropäisches Klima), wird eine Fehlermeldung an den Seriellen Port geschickt und auf das Hochladen der Daten verzichtet.   
+``` c
     // SENSOR 2: Temperature/Humidity Sensor
     hdc_temp_humi.begin(HDC100X_TEMP_HUMI, HDC100X_14BIT, HDC100X_14BIT, DISABLE);
 
@@ -167,7 +188,9 @@ void loop()
     } else {
       Serial.println("Humidity/Temperature Sensor not connected/not working!");
     }
-    
+    ``` 
+Analog zu der Fehlererkennung bei dem Temperatursensor, werden auch bei dem Luftfeuchtigkeitssensor Daten die offensichtlich nicht der Realität entsprechen (Luftfeuchtigkeit von weniger als 0,5%) nicht an die OpenSenseMap übertragen.
+    ``` c
     // Error value if Sensor is not connected is about 0.4!
     if (hdc_temp_humi.getHumi() > 0.5) {
       postFloatValue(hdc_temp_humi.getHumi(), 1, "XXXXXXXXXXXXXXXXXXXXXXXX");
@@ -176,8 +199,11 @@ void loop()
     }
     // Ende von SENSOR 2
 
+```
+Das Auslesen des UV-Sensors wurde aus dem Anwendungsbeispiel des Sensors von der offiziellen Herstellerseite übernommen. Weitere Informationen * [hier](https://github.com/watterott/VEML6070-Breakout). Wieder wurde eine einfache Fehlererkennung implementiert (UV-Sensor gibt '3' aus wenn defekt).
+``` c
     // SENSOR 4 : UV-Sensor
-    // Umrechnung aus SenseBox Wiki übernommen
+    // Umrechnung vom Hersteller übernommen
     Wire.beginTransmission(I2C_ADDR_UV);
     Wire.write((IT_1 << 2) | 0x02);
     Wire.endTransmission();
@@ -203,8 +229,9 @@ void loop()
       Serial.println("UV Sensor not connected/not working!");
     }
     // Ende von SENSOR 4
-
-
+``` 
+Die Umrechnung von der 0-1023 Skala der analogRead() Funktion des Arduino zu m/s Windgeschwindigkeit wurde übernommen. Genauere Erklärung zu der Umrechnung in den Inline-Kommentaren.
+``` c
     // SENSOR 5: Wind
     /*
      *  Code taken from : http://www.hackerscapes.com/2014/11/anemometer/
@@ -245,7 +272,9 @@ void loop()
     // Ende von SENSOR 5
   }
 }
-
+``` 
+Routinen zum Upload der Messdaten wurde aus der von der OpenSenseMap bereitgestellten Schablone übernommen.
+``` c
 void postFloatValue(float measurement, int digits, String sensorId)
 {
   //Float zu String konvertieren
@@ -313,13 +342,14 @@ Die Station wurde auf der OpenSenseMap unter dem Namen "Wetterstation Specki & E
 * Windgeschwindigkeit (m/s)
 * Luftfeuchtigkeit(%)
 
+Die Box kann direkt unter der Adresse * [Wetterstation Specki & Erich](http://opensensemap.org/#/explore/57062d7345fd40c81974691c) erreicht werden.
 
 ## Stationsaufbau
-Die Station wird am Michaelweg, 48149 Münster in einem Garten aufgestellt. Das Anemometer befindet sich in offener Lage, sodass die Messdaten möglichst wenig verfälscht werden. Auch der Temperatursensor befindet sich außerhalb der Box, damit eine genaue Ermittlung der Daten erfolgen kann. Licht/UV-Sensor befinden sich innerhalb der Box.
+Die Station wird am Michaelweg, 48149 Münster in einem Garten aufgestellt. Das Anemometer befindet sich in offener Lage, sodass die Messdaten möglichst wenig verfälscht werden. Auch der Temperatur/Feuchtigkeitssensor befindet sich außerhalb der Box, damit die Daten möglichst wenig verfälscht werden. Licht/UV-Sensor befinden sich innerhalb der Box.
 
 ## Kontakt
 Eric Thieme-Garmann & Jan Speckamp
 
 [erictg96@googlemail.com](erictg96@googlemail.com) & [speckij@gmail.com](speckij@gmail.com)
 
-19.04.2016
+13.04.2016
