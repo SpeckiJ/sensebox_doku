@@ -3,7 +3,7 @@
 # Wetterstation Specki & Eric
 
 
-## In der Sensebox werden verschiedenste Daten gemessen, und diese dann an die OpenSenseMap übermittelt, die dadurch als Basis für verschiedene Karten dienen kann.
+## In der Sensebox werden Umweltdaten gemessen und an die OpenSenseMap übermittelt, die dadurch als Basis für verschiedene Karten dienen kann.
 
 ## Materialien
 #### Aus der senseBox:edu
@@ -24,14 +24,22 @@
 Auf das Genuino/Uno ist das WIZnet Ethernet Shield gesteckt um Netzwerk und Stromverbindung zu ermöglichen. Zusätzlich haben wir das Board um eine Kupferplatine erweitert um UV und Lichtsensoren horizontal ausgerichtet zu befestigen, damit korrekte Messdaten ermittelt werden können. Während sich die oben genannten Sensoren innerhalb der Wetterfest-Box befinden, sind Temperatursensor und Anemometer außerhalb der Box installiert um die Messdaten nicht zu verfälschen. Über ein Ethernet-Kabel werden die Messdaten in einem vorgegebenen Intervall an die OpenSenseMap übermittelt.
 Die Stromversorgung der gesamten Box wird über einen Power-over-Ethernet Adapter realisiert.
 
-<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/20160419123110.png" width="500"/>
-<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/18d5700e-ed7e-44d7-8bf5-6be4895a9a79.jpg" width="500"/>
+Improvisiertes Shield für den Arduino:
+<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/20160419123110.png" width="750"/>
 
-Das Anemometer benötigt zusätzlich eine eigene Stromversorgung von 9-25V. Daher wurde das Verbindungskabel zusätzlich mit einem 12V Hohlstecker verlötet der an eine zusätzliche Batterie innerhalb der Box angeschlossen wurde.
 
+Das improvisierte Shield für den Arduino basiert auf einer einfachen einseitigen Streifenrasterplatine. Da fast alle Sensoren über I2C ausgelesen werden, wurden die für I2C benötigten Pins (GND,VCC,SCL,SDA) direkt nebeneinander gelegt. Dies ermöglicht es, mit einem einzelnen Kabel mit 3er-Stecker die auf den Sensoren direkt nebeneinanderliegenden Anschlüsse VCC,SCL,SDA direkt anzuschließen. Zusätzlich wird noch ein einzelnes Kabel für GND benötigt. Durch die Verwendung der 3er-Stecker sinkt die Anzahl der benötigten Kabel auf zwei, was hilft die gesamte Schaltung übersichtlich zu halten.
+Schaltplan:
+<img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/senseBox.jpg" width="7500"/>
+
+In dem Schaltplans wurde auf Grund der Übersichtlichkeit auf die 3er-Stecker verzichtet (Kabelstränge würden dauerhaft überlappen -> Schaltung nicht mehr klar zu erkennen). Stattdessen sind die Anschlüsse zu den Sensoren durch 3 parrallele einzelne Kabelverbindungen dargestellt.
+
+Das Anemometer gibt die Windgeschwindigkeit als analoges Stromsignal zwischen 0,4V und 2V über das Violett eingezeichnete Kabel wieder. Das Anemometer benötigt eine eigene Stromversorgung von 9-25V. Diese wird von einer zusätzlichen Batteriebox innerhalb der senesBox gewährleistet.
+
+__Wichtig__ in dem Schaltplan zu beachten ist zudem, dass der Minuspol der zusätzlichen Stromversorgung mit dem Minuspol des Arduino verbunden ist! Ist dies nicht der Fall, ist es für den Arduino unmöglich die Spannungsschwankungen auf dem Signalkabel des Anemometers zu erkennen!
+
+Fertig zusammengebaute Box mit zusätzlicher integrierter Stromversorgung:
 <img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/4c9bb9a4-f4c5-492d-b8e4-84626dac6b9a.jpg" width="600"/>
-
-
 #### Softwaresketch
 
 Der Softwaresketch basiert auf der von der OpenSenseMap bereitgestellten Schablone.
@@ -352,6 +360,7 @@ Die Box kann direkt unter der Adresse * [Wetterstation Specki & Eric](http://ope
 ## Stationsaufbau
 Die Station wird am Michaelweg, 48149 Münster in einem Garten aufgestellt. Das Anemometer befindet sich in möglichst offener Lage, sodass die Messdaten möglichst wenig verfälscht werden. Auch der Temperatur/Feuchtigkeitssensor befindet sich außerhalb der Box, damit die Daten möglichst wenig verfälscht werden. Licht/UV-Sensor befinden sich innerhalb der Box.
 
+Platzierung der Box:
 <img src="https://github.com/SpeckiJ/sensebox_doku/blob/master/images/4fce8b81-4eb6-4938-8cd7-8694c4cc79d8.jpg" width="1000"/>
 
 ## Kontakt
